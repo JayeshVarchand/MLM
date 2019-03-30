@@ -132,7 +132,77 @@ public class ProductPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	/*	try
+		{
+			
+                        if(r1.next())
+                            {
+				AddProductPage h1=new AddProductPage();
+				h1.setVisible(true);
+				h1.pack();
+				h1.setLocationRelativeTo(null);
+				h1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				this.dispose();
+				}
+                        else
+                            System.out.println("NO");
+		}
+	
+		catch (Exception e)
+		{
+			System.out.println("  " +e.getMessage());
+		}
+	*/
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	/*
+        try
+		{
+			
+                        if(r1.next())
+                            {
+				ViewProductPage h1=new ViewProductPage();
+				h1.setVisible(true);
+				h1.pack();
+				h1.setLocationRelativeTo(null);
+				h1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				this.dispose();
+				}
+                        else
+                            System.out.println("NO");
+		}
+	
+		catch (Exception e)
+		{
+			System.out.println("  " +e.getMessage());
+		}
+	*/
+    }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	/*	try
+		{
+			
+                        if(r1.next())
+                            {
+				DeleteProductPage h1=new DeleteProductPage();
+				h1.setVisible(true);
+				h1.pack();
+				h1.setLocationRelativeTo(null);
+				h1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				this.dispose();
+				}
+                        else
+                            System.out.println("NO");
+		}
+	
+		catch (Exception e)
+		{
+			System.out.println("  " +e.getMessage());
+		}
+	*/
+    }
                           
     /**
      * @param args the command line arguments
