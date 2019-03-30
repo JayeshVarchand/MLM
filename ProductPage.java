@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- 
-* To change this template file, choose Tools | Templates
- 
-* and open the template in the editor.
- */
+/**
+* This is Product_Page where there are three buttons available Add_Products, View_Products, and Delete_Products
+* 
+*/
 
 import java.sql.*;
 import javax.swing.*;
 
 
 /*
+* Date created :31-March-2019
 *
-
-*
-
 * @author Jayesh Varchand
- 
 */
 
 public class ProductPage extends javax.swing.JFrame {
 
-/**
-     
-* Creates new form ProductPage
-     
+/**     
+* Creates new page ProductPage     
 */
 
     public ProductPage() {
