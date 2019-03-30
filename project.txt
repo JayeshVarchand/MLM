@@ -1,0 +1,125 @@
+[1]---Category---
+
+CREATE table "CATEGORY" (
+    "CAT_ID"     NUMBER(5),
+    "CATNAME"    VARCHAR2(10),
+    constraint  "CATEGORY_PK" primary key ("CAT_ID")
+)
+/
+
+CREATE sequence "CATEGORY_SEQ" 
+/
+
+CREATE trigger "BI_CATEGORY"  
+  before insert on "CATEGORY"              
+  for each row 
+begin  
+  if :NEW."CAT_ID" is null then
+    select "CATEGORY_SEQ".nextval into :NEW."CAT_ID" from dual;
+  end if;
+end;
+/   
+
+[2]---Customer----
+
+CREATE TABLE  "CUSTOMER" 
+   (	"CID" NUMBER(5,0), 
+	"CNAME" VARCHAR2(20), 
+	"PHONE" VARCHAR2(10), 
+	"BALANCE" NUMBER(7,0), 
+	"ADDRESS" VARCHAR2(20), 
+	"SPON_ID" NUMBER(5,0), 
+	 CONSTRAINT "CUSTOMER_PK" PRIMARY KEY ("CID") ENABLE
+   ) ;
+
+CREATE OR REPLACE TRIGGER  "BI_CUSTOMER" 
+  before insert on "CUSTOMER"               
+  for each row  
+begin   
+  if :NEW."CID" is null then 
+    select "CUSTOMER_SEQ".nextval into :NEW."CID" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_CUSTOMER" ENABLE;
+
+
+[3].---TRANSACTION---
+ (	"TID" NUMBER(5,0), 
+	"CID" NUMBER(5,0), 
+	"TDATE" DATE, 
+	"AMOUNT" NUMBER(7,0), 
+	 CONSTRAINT "TRANSACTION_PK" PRIMARY KEY ("TID") ENABLE
+   ) ;ALTER TABLE  "TRANSACTION" ADD CONSTRAINT "TRANSACTION_FK" FOREIGN KEY ("CID")
+	  REFERENCES  "CUSTOMER" ("CID") ON DELETE CASCADE ENABLE;
+
+CREATE OR REPLACE TRIGGER  "BI_TRANSACTION" 
+  before insert on "TRANSACTION"               
+  for each row  
+begin   
+  if :NEW."TID" is null then 
+    select "TRANSACTION_SEQ".nextval into :NEW."TID" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_TRANSACTION" ENABLE;
+
+
+[4].---ORDER_TABLE---
+CREATE TABLE  "ORDER_TABLE" 
+   (	"O_ID" NUMBER(5,0), 
+	"CID" NUMBER(5,0), 
+	"O_DATE" DATE, 
+	"TOT_AMT" NUMBER(7,0), 
+	 CONSTRAINT "ORDER_TABLE_PK" PRIMARY KEY ("O_ID") ENABLE
+   ) ;ALTER TABLE  "ORDER_TABLE" ADD CONSTRAINT "ORDER_TABLE_FK" FOREIGN KEY ("CID")
+	  REFERENCES  "CUSTOMER" ("CID") ENABLE;
+
+CREATE OR REPLACE TRIGGER  "BI_ORDER_TABLE" 
+  before insert on "ORDER_TABLE"               
+  for each row  
+begin   
+  if :NEW."O_ID" is null then 
+    select "ORDER_TABLE_SEQ".nextval into :NEW."O_ID" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_ORDER_TABLE" ENABLE;
+
+[5].---ORDER_DETAIL---
+CREATE TABLE  "ORDER_DETAIL" 
+   (	"PID" NUMBER(5,0), 
+	"O_ID" NUMBER(5,0), 
+	"QTY" NUMBER(2,0), 
+	"AMOUNT" NUMBER(7,0), 
+	 CONSTRAINT "ORDER_DETAIL_PK" PRIMARY KEY ("O_ID", "PID") ENABLE
+   ) ;
+
+
+[6].---PRODUCT---
+
+CREATE TABLE  "PRODUCT" 
+   (	"PID" NUMBER(5,0), 
+	"CAT_ID" NUMBER(5,0), 
+	"PNAME" VARCHAR2(15), 
+	"TOT_QTY" NUMBER(5,0), 
+	"PRICE" NUMBER(7,0), 
+	 CONSTRAINT "PRODUCT_PK" PRIMARY KEY ("PID") ENABLE
+   ) ;ALTER TABLE  "PRODUCT" ADD CONSTRAINT "PRODUCT_FK" FOREIGN KEY ("CAT_ID")
+	  REFERENCES  "CATEGORY" ("CAT_ID") ENABLE;
+
+CREATE OR REPLACE TRIGGER  "BI_PRODUCT" 
+  before insert on "PRODUCT"               
+  for each row  
+begin   
+  if :NEW."PID" is null then 
+    select "PRODUCT_SEQ".nextval into :NEW."PID" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_PRODUCT" ENABLE;
+
